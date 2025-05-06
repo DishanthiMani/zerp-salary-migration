@@ -1,7 +1,7 @@
 package com.zirius.zerp.service;
 
 import com.zirius.zerp.dto.TaxCardDetailsDTO;
-import com.zirius.zerp.repository.AltinnCommunicationDetailsRepository;
+import com.zirius.zerp.repository.zerpRepo.AltinnCommunicationDetailsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

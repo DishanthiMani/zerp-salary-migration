@@ -1,8 +1,8 @@
 package com.zirius.zerp.dto;
 
-import com.zirius.zerp.model.BankListLineItemLog;
-import com.zirius.zerp.model.BankListLog;
-import com.zirius.zerp.model.SalaryPaymentRequestDetails;
+import com.zirius.zerp.model.zerpapp.BankListLineItemLog;
+import com.zirius.zerp.model.zerpapp.BankListLog;
+import com.zirius.zerp.model.zerpapp.SalaryPaymentRequestDetails;
 import lombok.Data;
 
 import java.util.List;

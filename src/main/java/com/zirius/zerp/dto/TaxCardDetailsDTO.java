@@ -1,10 +1,10 @@
 package com.zirius.zerp.dto;
 
-import com.zirius.zerp.model.AltinnSalaryTaxInfo;
-import com.zirius.zerp.model.AltinnSalaryTaxInfoUsers;
-import com.zirius.zerp.model.EmployeeTaxWithholdingDetails;
-import com.zirius.zerp.model.SalaryEmployeeTaxDetails;
-import com.zirius.zerp.model.SalaryTaxInfoLog;
+import com.zirius.zerp.model.zerpapp.AltinnSalaryTaxInfo;
+import com.zirius.zerp.model.zerpapp.AltinnSalaryTaxInfoUsers;
+import com.zirius.zerp.model.zerpapp.EmployeeTaxWithholdingDetails;
+import com.zirius.zerp.model.zerpapp.SalaryEmployeeTaxDetails;
+import com.zirius.zerp.model.zerpapp.SalaryTaxInfoLog;
 import lombok.Data;
 
 import java.util.List;

@@ -1,21 +1,21 @@
 package com.zirius.zerp.dto;
 
-import com.zirius.zerp.model.AltinnUser;
-import com.zirius.zerp.model.ClaimCollectorDetails;
-import com.zirius.zerp.model.ClaimCollectorValues;
-import com.zirius.zerp.model.CompanyFreeCarBenefits;
-import com.zirius.zerp.model.CompanyFreeCarDetails;
-import com.zirius.zerp.model.CompanyFreeCarInsurance;
-import com.zirius.zerp.model.CompanyFreeCarSetting;
-import com.zirius.zerp.model.CompanyPensionOTP;
-import com.zirius.zerp.model.CompanySalaryDetails;
-import com.zirius.zerp.model.CompanyWorkPlace;
-import com.zirius.zerp.model.CompanyWorkPlaceMunicipality;
-import com.zirius.zerp.model.SalaryGroup;
-import com.zirius.zerp.model.SalaryReportingCode;
-import com.zirius.zerp.model.SalaryReportingCodeAmessage;
-import com.zirius.zerp.model.SalaryReportingCodeBasis;
-import com.zirius.zerp.model.SalaryYearlyConstant;
+import com.zirius.zerp.model.zerpapp.AltinnUser;
+import com.zirius.zerp.model.zerpapp.ClaimCollectorDetails;
+import com.zirius.zerp.model.zerpapp.ClaimCollectorValues;
+import com.zirius.zerp.model.zerpapp.CompanyFreeCarBenefits;
+import com.zirius.zerp.model.zerpapp.CompanyFreeCarDetails;
+import com.zirius.zerp.model.zerpapp.CompanyFreeCarInsurance;
+import com.zirius.zerp.model.zerpapp.CompanyFreeCarSetting;
+import com.zirius.zerp.model.zerpapp.CompanyPensionOTP;
+import com.zirius.zerp.model.zerpapp.CompanySalaryDetails;
+import com.zirius.zerp.model.zerpapp.CompanyWorkPlace;
+import com.zirius.zerp.model.zerpapp.CompanyWorkPlaceMunicipality;
+import com.zirius.zerp.model.zerpapp.SalaryGroup;
+import com.zirius.zerp.model.zerpapp.SalaryReportingCode;
+import com.zirius.zerp.model.zerpapp.SalaryReportingCodeAmessage;
+import com.zirius.zerp.model.zerpapp.SalaryReportingCodeBasis;
+import com.zirius.zerp.model.zerpapp.SalaryYearlyConstant;
 
 import java.util.List;
 

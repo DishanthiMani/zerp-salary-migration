@@ -1,22 +1,21 @@
 package com.zirius.zerp.service;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.zirius.zerp.dto.EmployeeConfigDTO;
-import com.zirius.zerp.model.BankAccounts;
-import com.zirius.zerp.model.EmployeeAppointments;
-import com.zirius.zerp.model.EmployeeSalaryAccounts;
-import com.zirius.zerp.model.EmployeeScheme;
-import com.zirius.zerp.model.EmployeeStartUpDetails;
-import com.zirius.zerp.model.EmployeeStartUpSalaryCode;
-import com.zirius.zerp.model.EmployeeTaxDeduction;
-import com.zirius.zerp.model.EmployeeWorkPlace;
-import com.zirius.zerp.model.UserClaimDetils;
-import com.zirius.zerp.model.UserCompany;
-import com.zirius.zerp.model.UserCompanySalaryCode;
-import com.zirius.zerp.model.UserCompanySalaryConfig;
-import com.zirius.zerp.model.UserFreeCarDetails;
-import com.zirius.zerp.model.UserSalaryExtension;
-import com.zirius.zerp.repository.EmployeeConfigRepository;
+import com.zirius.zerp.model.zerpapp.BankAccounts;
+import com.zirius.zerp.model.zerpapp.EmployeeAppointments;
+import com.zirius.zerp.model.zerpapp.EmployeeSalaryAccounts;
+import com.zirius.zerp.model.zerpapp.EmployeeScheme;
+import com.zirius.zerp.model.zerpapp.EmployeeStartUpDetails;
+import com.zirius.zerp.model.zerpapp.EmployeeStartUpSalaryCode;
+import com.zirius.zerp.model.zerpapp.EmployeeTaxDeduction;
+import com.zirius.zerp.model.zerpapp.EmployeeWorkPlace;
+import com.zirius.zerp.model.zerpapp.UserClaimDetils;
+import com.zirius.zerp.model.zerpapp.UserCompany;
+import com.zirius.zerp.model.zerpapp.UserCompanySalaryCode;
+import com.zirius.zerp.model.zerpapp.UserCompanySalaryConfig;
+import com.zirius.zerp.model.zerpapp.UserFreeCarDetails;
+import com.zirius.zerp.model.zerpapp.UserSalaryExtension;
+import com.zirius.zerp.repository.zerpRepo.EmployeeConfigRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
