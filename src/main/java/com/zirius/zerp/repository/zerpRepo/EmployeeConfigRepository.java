@@ -3,6 +3,7 @@ package com.zirius.zerp.repository.zerpRepo;
 
 import com.zirius.zerp.model.zerpapp.BankAccounts;
 import com.zirius.zerp.model.zerpapp.EmployeeAppointments;
+import com.zirius.zerp.model.zerpapp.EmployeePermission;
 import com.zirius.zerp.model.zerpapp.EmployeeSalaryAccounts;
 import com.zirius.zerp.model.zerpapp.EmployeeScheme;
 import com.zirius.zerp.model.zerpapp.EmployeeStartUpDetails;
@@ -117,6 +118,11 @@ public class EmployeeConfigRepository {
 
     public List<UserSalaryExtension> getUserCompanySalaryExtension(Integer companyId) {
         return entityManager.createQuery("SELECT c FROM UserSalaryExtension c WHERE c.COMPANY_ID = :companyId", UserSalaryExtension.class)
+                .setParameter("companyId", companyId).getResultList();
+    }
+
+    public List<EmployeePermission> getEmployeePermission(Integer companyId) {
+        return entityManager.createQuery("SELECT c FROM EmployeePermission c WHERE c.COMPANY_ID = :companyId", EmployeePermission.class)
                 .setParameter("companyId", companyId).getResultList();
     }
 

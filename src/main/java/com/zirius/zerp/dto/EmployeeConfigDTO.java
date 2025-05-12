@@ -2,6 +2,7 @@ package com.zirius.zerp.dto;
 
 import com.zirius.zerp.model.zerpapp.BankAccounts;
 import com.zirius.zerp.model.zerpapp.EmployeeAppointments;
+import com.zirius.zerp.model.zerpapp.EmployeePermission;
 import com.zirius.zerp.model.zerpapp.EmployeeSalaryAccounts;
 import com.zirius.zerp.model.zerpapp.EmployeeScheme;
 import com.zirius.zerp.model.zerpapp.EmployeeStartUpDetails;
@@ -37,5 +38,6 @@ public class EmployeeConfigDTO {
     private List<UserCompanySalaryConfig> employeeSalaryConfig;
     private List<UserCompanySalaryCode> employeeSalaryCode;
     private List<UserSalaryExtension> employeeExtension;
+    private List<EmployeePermission> employeePermissions;
 
 }

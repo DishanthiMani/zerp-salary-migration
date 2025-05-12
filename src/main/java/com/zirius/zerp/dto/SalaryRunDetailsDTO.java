@@ -8,6 +8,7 @@ import com.zirius.zerp.model.zerpapp.AltinnSalaryRun;
 import com.zirius.zerp.model.zerpapp.AltinnSalaryRunLineItem;
 import com.zirius.zerp.model.zerpapp.AltinnSalaryRunPermission;
 import com.zirius.zerp.model.zerpapp.AltinnSalaryRunWorkRelationship;
+import com.zirius.zerp.model.zerpapp.BimonthlyReportDetails;
 import com.zirius.zerp.model.zerpapp.ClaimDetailsLog;
 import com.zirius.zerp.model.zerpapp.CompanyTaxLog;
 import com.zirius.zerp.model.zerpapp.HolidayPayListLineItemLog;
@@ -18,6 +19,7 @@ import com.zirius.zerp.model.zerpapp.LedgerAccountSalaryReportingCodeLineItemLog
 import com.zirius.zerp.model.zerpapp.PaySlipLineItemLog;
 import com.zirius.zerp.model.zerpapp.PaySlipLog;
 import com.zirius.zerp.model.zerpapp.PaySlipPermissionLog;
+import com.zirius.zerp.model.zerpapp.SalaryReportLog;
 import com.zirius.zerp.model.zerpapp.SalaryRunLog;
 import lombok.Data;
 
@@ -45,6 +47,8 @@ public class SalaryRunDetailsDTO {
     private List<AltinnFeedback> altinnFeedbacks;
     private List<AltinnFeedbackInfo> altinnFeedbackInfos;
     private List<AltinnReferenceInfo> altinnReferenceInfos;
+    private List<SalaryReportLog> salaryReportLogs;
+    private List<BimonthlyReportDetails> bimonthlyReportDetails;
     private BankPaymentDetailsDTO bankPaymentDetailsDTO;
 
 }

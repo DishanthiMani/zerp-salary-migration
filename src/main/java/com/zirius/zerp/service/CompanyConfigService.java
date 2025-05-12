@@ -46,6 +46,7 @@ public class CompanyConfigService {
     @Autowired
     private SalaryRunDetailsService salaryRunDetailsService;
 
+
     @Autowired
     private ObjectMapper objectMapper; // for manual JSON conversion if needed
 
@@ -111,6 +112,7 @@ public class CompanyConfigService {
 
         CompanyDataDTO companyDataDTO = new CompanyDataDTO();
         Company company = companyConfigRepository.getCompanyDetails(companyId);
+        companyDataDTO.setOrganizationNumber(company.getORG_NO());
         companyDataDTO.setCompanyId(companyId);
         companyDataDTO.setCompanyName(company.getNAME());
         AltinnCommunicationDetilsDTO altinnCommunicationDetilsDTO = new AltinnCommunicationDetilsDTO();
@@ -126,7 +128,7 @@ public class CompanyConfigService {
 
         String jsonString = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(companyDataDTO);
 
-        String fileName = "E:\\Migration_docs\\" + companyDataDTO.getCompanyName() + "_" + companyId + ".json";
+        String fileName = "E:\\Migration_docs\\" + companyDataDTO.getOrganizationNumber() + ".json";
 
         Files.write(
                 Paths.get(fileName),

@@ -12,6 +12,7 @@ import com.zirius.zerp.model.zerpapp.AltinnSalaryTaxInfo;
 import com.zirius.zerp.model.zerpapp.AltinnSalaryTaxInfoUsers;
 import com.zirius.zerp.model.zerpapp.BankListLineItemLog;
 import com.zirius.zerp.model.zerpapp.BankListLog;
+import com.zirius.zerp.model.zerpapp.BimonthlyReportDetails;
 import com.zirius.zerp.model.zerpapp.ClaimDetailsLog;
 import com.zirius.zerp.model.zerpapp.CompanyTaxLog;
 import com.zirius.zerp.model.zerpapp.EmployeeTaxWithholdingDetails;
@@ -24,6 +25,7 @@ import com.zirius.zerp.model.zerpapp.PaySlipLineItemLog;
 import com.zirius.zerp.model.zerpapp.PaySlipLog;
 import com.zirius.zerp.model.zerpapp.PaySlipPermissionLog;
 import com.zirius.zerp.model.zerpapp.SalaryEmployeeTaxDetails;
+import com.zirius.zerp.model.zerpapp.SalaryReportLog;
 import com.zirius.zerp.model.zerpapp.SalaryRunLog;
 import com.zirius.zerp.model.zerpapp.SalaryTaxInfoLog;
 import jakarta.persistence.EntityManager;
@@ -180,6 +182,18 @@ public class AltinnCommunicationDetailsRepository {
                 "JOIN SalaryRunLog s ON s.SALARY_RUN_LOG_ID = b.SALARY_RUN_LOG_ID WHERE s.COMPANY_ID = :companyId", BankListLineItemLog.class)
                 .setParameter("companyId", companyId).getResultList();
     }
+
+    public List<SalaryReportLog> getSalaryReportLog(Integer companyId) {
+        return entityManager.createQuery("SELECT c FROM SalaryReportLog c WHERE c.COMPANY_ID = :companyId", SalaryReportLog.class)
+                .setParameter("companyId", companyId).getResultList();
+    }
+
+    public List<BimonthlyReportDetails> getBimonthlyReportDetails(Integer companyId) {
+        return entityManager.createQuery("SELECT c FROM BimonthlyReportDetails c JOIN AltinnSalaryReport s " +
+                        "ON s.SALARY_REPORT_ID = c.SALARY_REPORT_ID WHERE s.COMPANY_ID = :companyId", BimonthlyReportDetails.class)
+                .setParameter("companyId", companyId).getResultList();
+    }
+
 
 //    public List<SalaryPaymentRequestDetails> getSalaryPaymentRequestDetails(Integer companyId) {
 //        return entityManager.createQuery("SELECT c FROM SalaryPaymentRequestDetails c ", SalaryPaymentRequestDetails.class).setParameter("companyId", companyId).getResultList();

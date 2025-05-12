@@ -35,6 +35,8 @@ public class SalaryRunDetailsService {
         salaryRunDetailsDTOS.setAltinnFeedbacks(repository.getAltinnFeedBack(companyId));
         salaryRunDetailsDTOS.setAltinnFeedbackInfos(repository.getAltinnFeedbackInfo(companyId));
         salaryRunDetailsDTOS.setAltinnReferenceInfos(repository.getAltinnReferenceInfo(companyId));
+        salaryRunDetailsDTOS.setSalaryReportLogs(repository.getSalaryReportLog(companyId));
+        salaryRunDetailsDTOS.setBimonthlyReportDetails(repository.getBimonthlyReportDetails(companyId));
 
         BankPaymentDetailsDTO bankPaymentDetailsDTO = new BankPaymentDetailsDTO();
         bankPaymentDetailsDTO.setBankListLogs(repository.getBankListLog(companyId));

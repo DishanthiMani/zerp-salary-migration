@@ -7,4 +7,5 @@ public class AltinnCommunicationDetilsDTO {
 
     private TaxCardDetailsDTO taxCardDetailsDTO;
     private SalaryRunDetailsDTO salaryRunDetailsDTO;
+
 }

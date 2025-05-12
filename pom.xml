@@ -10,8 +10,8 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.2.4</version>  <!-- Important: Spring Boot 3.2+ -->
-        <relativePath/> <!-- lookup parent from repository -->
+        <version>3.2.4</version>
+        <relativePath/>
     </parent>
 
     <properties>
@@ -77,6 +77,8 @@
             <artifactId>objectstoreclient</artifactId>
             <version>0.0.1</version>
         </dependency>
+
+
 
     </dependencies>
 

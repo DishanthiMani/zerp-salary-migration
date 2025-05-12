@@ -3,6 +3,7 @@ package com.zirius.zerp.service;
 import com.zirius.zerp.dto.EmployeeConfigDTO;
 import com.zirius.zerp.model.zerpapp.BankAccounts;
 import com.zirius.zerp.model.zerpapp.EmployeeAppointments;
+import com.zirius.zerp.model.zerpapp.EmployeePermission;
 import com.zirius.zerp.model.zerpapp.EmployeeSalaryAccounts;
 import com.zirius.zerp.model.zerpapp.EmployeeScheme;
 import com.zirius.zerp.model.zerpapp.EmployeeStartUpDetails;
@@ -46,6 +47,7 @@ public class EmployeeConfigService {
         List<UserCompanySalaryConfig> employeeSalaryConfig = employeeConfigRepository.getUserCompanySalaryConfig(companyId);
         List<UserCompanySalaryCode> employeeSalaryCode = employeeConfigRepository.getUserCompanySalaryCode(companyId);
         List<UserSalaryExtension> employeeSalaryExtension = employeeConfigRepository.getUserCompanySalaryExtension(companyId);
+        List<EmployeePermission> employeePermissions = employeeConfigRepository.getEmployeePermission(companyId);
 
 
         employeeConfigDTO.setUserCompanyList(userCompanyList);
@@ -62,6 +64,7 @@ public class EmployeeConfigService {
         employeeConfigDTO.setEmployeeSalaryConfig(employeeSalaryConfig);
         employeeConfigDTO.setEmployeeSalaryCode(employeeSalaryCode);
         employeeConfigDTO.setEmployeeExtension(employeeSalaryExtension);
+        employeeConfigDTO.setEmployeePermissions(employeePermissions);
 
         return employeeConfigDTO;
     }
