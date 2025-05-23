@@ -1,5 +1,6 @@
 package com.zirius.zerp.model.zerpapp;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import java.util.Date;
 
@@ -57,6 +58,7 @@ public class SalaryGroup {
     private Double HOLIDAY_PAY_PERCENT_OVER_60;
 
     private Double HOURS_PER_DAY;
+
 
     public Long getSALARY_GROUP_ID() {
         return SALARY_GROUP_ID;

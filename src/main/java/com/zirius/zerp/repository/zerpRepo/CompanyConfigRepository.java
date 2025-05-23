@@ -1,5 +1,6 @@
 package com.zirius.zerp.repository.zerpRepo;
 
+import com.zirius.zerp.dto.SalaryReportingCodeDetailsDTO;
 import com.zirius.zerp.model.zerpapp.AltinnUser;
 import com.zirius.zerp.model.zerpapp.ClaimCollectorDetails;
 import com.zirius.zerp.model.zerpapp.ClaimCollectorValues;
@@ -47,6 +48,21 @@ public class CompanyConfigRepository {
                         "SELECT c FROM SalaryReportingCode c WHERE c.COMPANY_ID = :companyId", SalaryReportingCode.class)
                 .setParameter("companyId", companyId)
                 .getResultList();
+    }
+
+    public List<SalaryReportingCodeDetailsDTO> getSalaryCodeDetails(Integer companyId) {
+        String query = "SELECT new com.zirius.zerp.dto.SalaryReportingCodeDetailsDTO(" +
+                "c.SALARY_REPORTING_CODE_ID, c.SALARY_REPORTING_CODE, c.SALARY_REPORTING_CODE_NAME, " +
+                "c.ACCOUNT_ID, c.CREDIT_ACCOUNT_ID, c.SALARY_TYPE_ID, c.COST_PRICE, c.SALE_PRICE, c.IS_ACTIVE, " +
+                "c.COMPANY_ID, sm.SALARY_DESCRIPTION, sm.BENEFITS, sm.IS_SPECIFICATION, " +
+                "sb.IS_HOLIDAY_PAY, sb.IS_PAYROLL_TAX, sb.IS_UNION, sb.IS_PENSION, sb.TAXES_ID, sb.PENSION_ID, " +
+                "sb.SSB_ID, sb.SALARY_CODE_RATE_TYPE_ID, sb.SALARY_CODE_YEARLY_RATE_TYPE_ID, " +
+                "c.VERSION, c.CREATED_DATETIME, c.MODIFIED_DATETIME" +
+                ") FROM SalaryReportingCode c " +
+                "JOIN SalaryReportingCodeAmessage sm ON sm.SALARY_REPORTING_CODE_ID = c.SALARY_REPORTING_CODE_ID " +
+                "JOIN SalaryReportingCodeBasis sb ON sb.SALARY_REPORTING_CODE_ID = c.SALARY_REPORTING_CODE_ID " +
+                "WHERE c.COMPANY_ID = :companyId";
+        return entityManager.createQuery(query, SalaryReportingCodeDetailsDTO.class).setParameter("companyId", companyId).getResultList();
     }
 
     public List<CompanyWorkPlace> getCompanyWorkPlace(Integer companyId) {

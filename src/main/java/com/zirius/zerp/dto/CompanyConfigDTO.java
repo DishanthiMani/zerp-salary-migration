@@ -21,10 +21,11 @@ import java.util.List;
 
 public class CompanyConfigDTO {
     private List<SalaryGroup> salaryGroups;
+    private List<SalaryReportingCodeDetailsDTO> salaryCodeDetails;
     private List<SalaryReportingCode> salaryCodes;
-    private List<SalaryYearlyConstant> yearlyConstants;
     private List<SalaryReportingCodeAmessage> salaryReportingCodeAmessages;
     private List<SalaryReportingCodeBasis> salaryReportingCodeBases;
+    private List<SalaryYearlyConstant> yearlyConstants;
     private CompanySalaryDetails companySalaryDetails;
     private List<CompanyFreeCarDetails> companyFreeCarDetails;
     private List<CompanyFreeCarBenefits> companyFreeCarBenefits;
@@ -43,6 +44,14 @@ public class CompanyConfigDTO {
 
     public void setSalaryGroups(List<SalaryGroup> salaryGroups) {
         this.salaryGroups = salaryGroups;
+    }
+
+    public List<SalaryReportingCodeDetailsDTO> getSalaryCodeDetails() {
+        return salaryCodeDetails;
+    }
+
+    public void setSalaryCodeDetails(List<SalaryReportingCodeDetailsDTO> salaryCodeDetails) {
+        this.salaryCodeDetails = salaryCodeDetails;
     }
 
     public List<SalaryReportingCode> getSalaryCodes() {

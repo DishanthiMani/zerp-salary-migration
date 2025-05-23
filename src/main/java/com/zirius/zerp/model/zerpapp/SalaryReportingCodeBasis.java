@@ -17,10 +17,38 @@ public class SalaryReportingCodeBasis {
     private Boolean IS_PAYROLL_TAX;
     private Boolean IS_UNION;
     private Long TAXES_ID;
+    private Integer PENSION_ID;
     private Long IS_PENSION;
     private Long SSB_ID;
     private Date CREATED_DATETIME;
     private Date MODIFIED_DATETIME;
+    private Integer SALARY_CODE_RATE_TYPE_ID;
+    private Integer SALARY_CODE_YEARLY_RATE_TYPE_ID;
+
+
+    public Integer getPENSION_ID() {
+        return PENSION_ID;
+    }
+
+    public void setPENSION_ID(Integer PENSION_ID) {
+        this.PENSION_ID = PENSION_ID;
+    }
+
+    public Integer getSALARY_CODE_RATE_TYPE_ID() {
+        return SALARY_CODE_RATE_TYPE_ID;
+    }
+
+    public void setSALARY_CODE_RATE_TYPE_ID(Integer SALARY_CODE_RATE_TYPE_ID) {
+        this.SALARY_CODE_RATE_TYPE_ID = SALARY_CODE_RATE_TYPE_ID;
+    }
+
+    public Integer getSALARY_CODE_YEARLY_RATE_TYPE_ID() {
+        return SALARY_CODE_YEARLY_RATE_TYPE_ID;
+    }
+
+    public void setSALARY_CODE_YEARLY_RATE_TYPE_ID(Integer SALARY_CODE_YEARLY_RATE_TYPE_ID) {
+        this.SALARY_CODE_YEARLY_RATE_TYPE_ID = SALARY_CODE_YEARLY_RATE_TYPE_ID;
+    }
 
     public Integer getSALARY_REPORTING_CODE_ID() {
         return SALARY_REPORTING_CODE_ID;

@@ -5,6 +5,7 @@ import com.zirius.zerp.dto.AltinnCommunicationDetilsDTO;
 import com.zirius.zerp.dto.CompanyConfigDTO;
 import com.zirius.zerp.dto.CompanyDataDTO;
 import com.zirius.zerp.dto.EmployeeConfigDTO;
+import com.zirius.zerp.dto.SalaryReportingCodeDetailsDTO;
 import com.zirius.zerp.model.zerpapp.AltinnUser;
 import com.zirius.zerp.model.zerpapp.ClaimCollectorDetails;
 import com.zirius.zerp.model.zerpapp.ClaimCollectorValues;
@@ -53,7 +54,7 @@ public class CompanyConfigService {
     public CompanyConfigDTO fetchCompanyConfig(Integer companyId) {
 
         List<SalaryGroup> salaryGroups = companyConfigRepository.getSalaryGroups(companyId);
-        List<SalaryReportingCode> salaryCodes = companyConfigRepository.getSalaryCodes(companyId);
+        List<SalaryReportingCodeDetailsDTO> salaryCodes = companyConfigRepository.getSalaryCodeDetails(companyId);
         List<SalaryYearlyConstant> yearlyConstants = companyConfigRepository.getYearlyConstants(companyId);
         List<CompanyWorkPlace> companyWorkPlaces = companyConfigRepository.getCompanyWorkPlace(companyId);
         List<CompanyWorkPlaceMunicipality> companyWorkPlaceMunicipalities = companyConfigRepository.getCompanyWorkPlaceMunicipality(companyId);
@@ -71,7 +72,7 @@ public class CompanyConfigService {
 
         CompanyConfigDTO configDTO = new CompanyConfigDTO();
         configDTO.setSalaryGroups(salaryGroups);
-        configDTO.setSalaryCodes(salaryCodes);
+        configDTO.setSalaryCodeDetails(salaryCodes);
         configDTO.setSalaryReportingCodeBases(salaryReportingCodeBases);
         configDTO.setSalaryReportingCodeAmessages(salaryReportingCodeAmessages);
         configDTO.setCompanyWorkPlaces(companyWorkPlaces);
