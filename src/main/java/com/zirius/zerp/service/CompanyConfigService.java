@@ -18,6 +18,7 @@ import com.zirius.zerp.model.zerpapp.CompanyPensionOTP;
 import com.zirius.zerp.model.zerpapp.CompanySalaryDetails;
 import com.zirius.zerp.model.zerpapp.CompanyWorkPlace;
 import com.zirius.zerp.model.zerpapp.CompanyWorkPlaceMunicipality;
+import com.zirius.zerp.model.zerpapp.LedgerAccount;
 import com.zirius.zerp.model.zerpapp.SalaryGroup;
 import com.zirius.zerp.model.zerpapp.SalaryReportingCode;
 import com.zirius.zerp.model.zerpapp.SalaryReportingCodeAmessage;
@@ -31,6 +32,9 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class CompanyConfigService {
@@ -49,12 +53,13 @@ public class CompanyConfigService {
 
 
     @Autowired
-    private ObjectMapper objectMapper; // for manual JSON conversion if needed
+    private ObjectMapper objectMapper;
 
     public CompanyConfigDTO fetchCompanyConfig(Integer companyId) {
 
         List<SalaryGroup> salaryGroups = companyConfigRepository.getSalaryGroups(companyId);
-        List<SalaryReportingCodeDetailsDTO> salaryCodes = companyConfigRepository.getSalaryCodeDetails(companyId);
+        List<SalaryReportingCode> salaryCodes = companyConfigRepository.getSalaryCodes(companyId);
+        updateLedgerAccountDetails(salaryCodes);
         List<SalaryYearlyConstant> yearlyConstants = companyConfigRepository.getYearlyConstants(companyId);
         List<CompanyWorkPlace> companyWorkPlaces = companyConfigRepository.getCompanyWorkPlace(companyId);
         List<CompanyWorkPlaceMunicipality> companyWorkPlaceMunicipalities = companyConfigRepository.getCompanyWorkPlaceMunicipality(companyId);
@@ -72,7 +77,7 @@ public class CompanyConfigService {
 
         CompanyConfigDTO configDTO = new CompanyConfigDTO();
         configDTO.setSalaryGroups(salaryGroups);
-        configDTO.setSalaryCodeDetails(salaryCodes);
+        configDTO.setSalaryCodes(salaryCodes);
         configDTO.setSalaryReportingCodeBases(salaryReportingCodeBases);
         configDTO.setSalaryReportingCodeAmessages(salaryReportingCodeAmessages);
         configDTO.setCompanyWorkPlaces(companyWorkPlaces);
@@ -91,12 +96,35 @@ public class CompanyConfigService {
         return configDTO;
     }
 
-    public boolean fetchCompanyConfigAsJson(Integer companyId) throws Exception {
+    public void updateLedgerAccountDetails(List<SalaryReportingCode> salaryCodeList) {
+
+        List<LedgerAccount> ledgerList = companyConfigRepository.getLedgerAccountList();
+        Map<Integer, Integer> accountIdToAccountNoMap = ledgerList.stream()
+                .collect(Collectors.toMap(LedgerAccount::getACCOUNT_ID, LedgerAccount::getACCOUNT_NO));
+
+        salaryCodeList.forEach(salaryCode -> {
+            Integer accountId = Optional.ofNullable(salaryCode.getAccountId()).map(Long::intValue).orElse(null);
+            Integer creditAccountId = Optional.ofNullable(salaryCode.getCreditAccountId()).map(Long::intValue).orElse(null);
+
+            // Set account number based on accountId
+            if (accountId != null && accountIdToAccountNoMap.containsKey(accountId)) {
+                salaryCode.setAccountId(accountIdToAccountNoMap.get(accountId).longValue());
+            }
+
+            // Set account number based on creditAccountId
+            if (creditAccountId != null && accountIdToAccountNoMap.containsKey(creditAccountId)) {
+                salaryCode.setCreditAccountId(accountIdToAccountNoMap.get(creditAccountId).longValue());
+            }
+        });
+
+    }
+
+    public boolean fetchCompanyConfigAsJson(Integer companyId, Integer plussCompanyId) throws Exception {
         CompanyConfigDTO dto = fetchCompanyConfig(companyId);
 
         String jsonString = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(dto);
 
-        String fileName = "E:\\Migration_docs\\company_config_" + companyId + ".json";
+        String fileName = "E:\\Migration_docs\\company_config_" + plussCompanyId + ".json";
 
         Files.write(
                 Paths.get(fileName),
@@ -109,7 +137,7 @@ public class CompanyConfigService {
         return true;
     }
 
-    public boolean fetchWholeCompanyData(Integer companyId) throws Exception {
+    public boolean fetchWholeCompanyData(Integer companyId, Integer ziriusPlussCompanyId) throws Exception {
 
         CompanyDataDTO companyDataDTO = new CompanyDataDTO();
         Company company = companyConfigRepository.getCompanyDetails(companyId);
@@ -129,7 +157,7 @@ public class CompanyConfigService {
 
         String jsonString = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(companyDataDTO);
 
-        String fileName = "E:\\Migration_docs\\" + companyDataDTO.getOrganizationNumber() + ".json";
+        String fileName = "E:\\Migration_docs\\" + ziriusPlussCompanyId + ".json";
 
         Files.write(
                 Paths.get(fileName),

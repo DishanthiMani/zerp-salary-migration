@@ -13,10 +13,14 @@ public class CompanyDataMigrationController {
     private CompanyConfigService companyConfigService;
 
     @GetMapping("/companyData")
-    public ResponseEntity<Boolean> fetchWholeCompanyData(@RequestParam("companyId") Integer companyId) {
-        System.out.println("Received request for companyId: " + companyId);
+    public ResponseEntity<Boolean> fetchWholeCompanyData(
+            @RequestParam("companyId") Integer companyId,
+            @RequestParam("ziriusPlussCompanyId") Integer ziriusPlussCompanyId) {
+
+        System.out.println("Received request for companyId: " + companyId +
+                ", ziriusPlussCompanyId: " + ziriusPlussCompanyId);
         try {
-            boolean response = companyConfigService.fetchWholeCompanyData(companyId);
+            boolean response = companyConfigService.fetchWholeCompanyData(companyId, ziriusPlussCompanyId);
             return ResponseEntity.ok(response);
         } catch (Exception e) {
             e.printStackTrace();
@@ -24,11 +28,14 @@ public class CompanyDataMigrationController {
         }
     }
 
+
     @GetMapping("/fetch")
-    public ResponseEntity<Boolean> fetchCompanyConfig(@RequestParam("companyId") Integer companyId) {
-        System.out.println("Received request for companyId: " + companyId);
+    public ResponseEntity<Boolean> fetchCompanyConfig(@RequestParam("companyId") Integer companyId,
+                                                      @RequestParam("ziriusPlussCompanyId") Integer ziriusPlussCompanyId) {
+        System.out.println("Received request for companyId: " + companyId +
+                ", ziriusPlussCompanyId: " + ziriusPlussCompanyId);
         try {
-            boolean response = companyConfigService.fetchCompanyConfigAsJson(companyId);
+            boolean response = companyConfigService.fetchCompanyConfigAsJson(companyId, ziriusPlussCompanyId);
             return ResponseEntity.ok(response);
         } catch (Exception e) {
             e.printStackTrace();
