@@ -28,27 +28,24 @@ import java.util.List;
 @Data
 public class SalaryRunDetailsDTO {
 
-    private List<SalaryRunLog> salaryRunLogs;
-    private List<AltinnSalaryRun> altinnSalaryRuns;
+    private SalaryRunLog salaryRunLogs;
+    private AltinnSalaryRun altinnSalaryRuns;
     private List<AltinnSalaryRunLineItem> altinnSalaryRunLineItems;
     private List<AltinnSalaryRunPermission> altinnSalaryRunPermissions;
     private List<AltinnSalaryRunWorkRelationship> altinnSalaryRunWorkRelationships;
-    private List<AltinnSalaryReport> altinnSalaryReports;
     private List<PaySlipLog> paySlipLogs;
     private List<PaySlipLineItemLog> paySlipLineItemLogs;
     private List<ClaimDetailsLog> claimDetailsLogs;
     private List<CompanyTaxLog> companyTaxLogs;
-    private List<HolidayPayListLog> holidayPayListLogs;
-    private List<HolidayPayListLineItemLog> holidayPayListLineItemLogs;
+//    private List<HolidayPayListLog> holidayPayListLogs;
+//    private List<HolidayPayListLineItemLog> holidayPayListLineItemLogs;
     private List<PaySlipPermissionLog> paySlipPermissionLogs;
-    private List<LedgerAccountLog> ledgerAccountLogs;
+    private LedgerAccountLog ledgerAccountLogs;
     private List<LedgerAccountLineItemLog> ledgerAccountLineItemLogs;
     private List<LedgerAccountSalaryReportingCodeLineItemLog> ledgerAccountSalaryReportingCodeLineItemLogs;
     private List<AltinnFeedback> altinnFeedbacks;
     private List<AltinnFeedbackInfo> altinnFeedbackInfos;
     private List<AltinnReferenceInfo> altinnReferenceInfos;
-    private List<SalaryReportLog> salaryReportLogs;
-    private List<BimonthlyReportDetails> bimonthlyReportDetails;
     private BankPaymentDetailsDTO bankPaymentDetailsDTO;
 
 }

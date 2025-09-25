@@ -1,6 +1,7 @@
 package com.zirius.zerp.repository.zerpRepo;
 
 
+import com.zirius.zerp.model.zerpapp.AppUser;
 import com.zirius.zerp.model.zerpapp.BankAccounts;
 import com.zirius.zerp.model.zerpapp.EmployeeAppointments;
 import com.zirius.zerp.model.zerpapp.EmployeePermission;
@@ -22,6 +23,8 @@ import jakarta.persistence.PersistenceContext;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 @Repository
 public class EmployeeConfigRepository {
@@ -34,11 +37,11 @@ public class EmployeeConfigRepository {
                 .setParameter("companyId", companyId).getResultList();
     }
 
-    public List<EmployeeSalaryAccounts> getEmployeeSalaryAccount(Integer companyId) {
-
-        String query = "SELECT c FROM EmployeeSalaryAccounts c JOIN UserCompany u ON u.USER_COMPANY_ID = c.USER_COMPANY_ID " +
-                "WHERE u.COMPANY_ID = :companyId";
-        return entityManager.createQuery(query, EmployeeSalaryAccounts.class).setParameter("companyId", companyId).getResultList();
+    public List<AppUser> getAppUserList(List<Integer> ids) {
+        return entityManager.createQuery(
+                        "SELECT c FROM AppUser c WHERE c.USER_ID IN :ids", AppUser.class)
+                .setParameter("ids", ids)
+                .getResultList();
     }
 
     public List<BankAccounts> getBankAccounts(Integer companyId) {
@@ -46,84 +49,131 @@ public class EmployeeConfigRepository {
                 .setParameter("companyId", companyId).getResultList();
     }
 
-    public List<EmployeeTaxDeduction> getEmployeeTaxDeduction(Integer companyId) {
+
+    public Map<Integer, List<EmployeeSalaryAccounts>> getEmployeeSalaryAccount(Integer companyId) {
+        String query = "SELECT c FROM EmployeeSalaryAccounts c JOIN UserCompany u ON u.USER_COMPANY_ID = c.USER_COMPANY_ID " +
+                "WHERE u.COMPANY_ID = :companyId";
+        return entityManager.createQuery(query, EmployeeSalaryAccounts.class)
+                .setParameter("companyId", companyId)
+                .getResultList()
+                .stream()
+                .collect(Collectors.groupingBy(c -> c.getUSER_COMPANY_ID()));
+    }
+
+    public Map<Integer, List<EmployeeTaxDeduction>> getEmployeeTaxDeduction(Integer companyId) {
         return entityManager.createQuery("SELECT c FROM EmployeeTaxDeduction c JOIN " +
-                        "UserCompany u ON u.USER_COMPANY_ID = c.USER_COMPANY_ID WHERE " +
-                        "u.COMPANY_ID = :companyId", EmployeeTaxDeduction.class)
-                .setParameter("companyId", companyId).getResultList();
+                        "UserCompany u ON u.USER_COMPANY_ID = c.USER_COMPANY_ID WHERE u.COMPANY_ID = :companyId", EmployeeTaxDeduction.class)
+                .setParameter("companyId", companyId)
+                .getResultList()
+                .stream()
+                .collect(Collectors.groupingBy(c -> c.getUSER_COMPANY_ID()));
     }
 
-    public List<EmployeeAppointments> getEmployeeAppointments(Integer companyID) {
+    public Map<Integer, List<EmployeeAppointments>> getEmployeeAppointments(Integer companyId) {
         return entityManager.createQuery("SELECT c FROM EmployeeAppointments c JOIN " +
-                        "UserCompany u ON u.USER_COMPANY_ID = c.USER_COMPANY_ID WHERE " +
-                                                "u.COMPANY_ID = :companyId", EmployeeAppointments.class)
-                .setParameter("companyId", companyID).getResultList();
+                        "UserCompany u ON u.USER_COMPANY_ID = c.USER_COMPANY_ID WHERE u.COMPANY_ID = :companyId", EmployeeAppointments.class)
+                .setParameter("companyId", companyId)
+                .getResultList()
+                .stream()
+                .collect(Collectors.groupingBy(c -> c.getUSER_COMPANY_ID()));
     }
 
-
-    public List<EmployeeScheme> getEmployeeScheme(Integer companyID) {
+    public Map<Integer, List<EmployeeScheme>> getEmployeeScheme(Integer companyId) {
         return entityManager.createQuery("SELECT c FROM EmployeeScheme c JOIN " +
-                        "UserCompany u ON u.USER_COMPANY_ID = c.USER_COMPANY_ID WHERE " +
-                        "u.COMPANY_ID = :companyId", EmployeeScheme.class)
-                .setParameter("companyId", companyID).getResultList();
+                        "UserCompany u ON u.USER_COMPANY_ID = c.USER_COMPANY_ID WHERE u.COMPANY_ID = :companyId", EmployeeScheme.class)
+                .setParameter("companyId", companyId)
+                .getResultList()
+                .stream()
+                .collect(Collectors.groupingBy(c -> c.getUSER_COMPANY_ID()));
     }
 
-    public List<EmployeeStartUpDetails> getEmployeeStartUpDetails(Integer companyID) {
+    public Map<Integer, List<EmployeeStartUpDetails>> getEmployeeStartUpDetails(Integer companyId) {
         return entityManager.createQuery("SELECT c FROM EmployeeStartUpDetails c JOIN " +
                         "UserCompany u ON u.USER_COMPANY_ID = c.USER_COMPANY_ID WHERE u.COMPANY_ID = :companyId", EmployeeStartUpDetails.class)
-                .setParameter("companyId", companyID).getResultList();
+                .setParameter("companyId", companyId)
+                .getResultList()
+                .stream()
+                .collect(Collectors.groupingBy(c -> c.getUSER_COMPANY_ID()));
     }
 
-    public List<EmployeeStartUpSalaryCode> getEmployeeStartUpCodes(Integer companyId) {
+    public Map<Integer, List<EmployeeStartUpSalaryCode>> getEmployeeStartUpCodes(Integer companyId) {
         return entityManager.createQuery("SELECT c FROM EmployeeStartUpSalaryCode c JOIN " +
                         "UserCompany u ON u.USER_COMPANY_ID = c.USER_COMPANY_ID WHERE u.COMPANY_ID = :companyId", EmployeeStartUpSalaryCode.class)
-                .setParameter("companyId", companyId).getResultList();
+                .setParameter("companyId", companyId)
+                .getResultList()
+                .stream()
+                .collect(Collectors.groupingBy(c -> c.getUSER_COMPANY_ID()));
     }
 
-    public List<EmployeeWorkPlace> getEmployeeWorkPlaceList(Integer companyId) {
+    public Map<Integer, List<EmployeeWorkPlace>> getEmployeeWorkPlaceList(Integer companyId) {
         return entityManager.createQuery("SELECT c FROM EmployeeWorkPlace c JOIN " +
                         "UserCompany u ON u.USER_COMPANY_ID = c.USER_COMPANY_ID WHERE u.COMPANY_ID = :companyId", EmployeeWorkPlace.class)
-                .setParameter("companyId", companyId).getResultList();
+                .setParameter("companyId", companyId)
+                .getResultList()
+                .stream()
+                .collect(Collectors.groupingBy(c -> c.getUSER_COMPANY_ID()));
     }
 
-    public List<EmployeeWorkerIdDetails> getEmployeeWorkerIdDetails(Integer companyId) {
+    public Map<Integer, List<EmployeeWorkerIdDetails>> getEmployeeWorkerIdDetails(Integer companyId) {
         return entityManager.createQuery("SELECT c FROM EmployeeWorkerIdDetails c JOIN " +
                         "UserCompany u ON u.USER_COMPANY_ID = c.USER_COMPANY_ID WHERE u.COMPANY_ID = :companyId", EmployeeWorkerIdDetails.class)
-                .setParameter("companyId", companyId).getResultList();
+                .setParameter("companyId", companyId)
+                .getResultList()
+                .stream()
+                .collect(Collectors.groupingBy(c -> c.getUSER_COMPANY_ID()));
     }
 
-    public List<UserFreeCarDetails> getEmployeeFreeCarDetails(Integer companyId) {
+    public Map<Integer, List<UserFreeCarDetails>> getEmployeeFreeCarDetails(Integer companyId) {
         return entityManager.createQuery("SELECT c FROM UserFreeCarDetails c JOIN " +
                         "UserCompany u ON u.USER_COMPANY_ID = c.USER_COMPANY_ID WHERE u.COMPANY_ID = :companyId", UserFreeCarDetails.class)
-                .setParameter("companyId", companyId).getResultList();
+                .setParameter("companyId", companyId)
+                .getResultList()
+                .stream()
+                .collect(Collectors.groupingBy(c -> c.getUSER_COMPANY_ID()));
     }
 
-    public List<UserClaimDetils> getUserClaimDetails(Integer companyId) {
+    public Map<Integer, List<UserClaimDetils>> getUserClaimDetails(Integer companyId) {
         return entityManager.createQuery("SELECT c FROM UserClaimDetils c JOIN " +
                         "UserCompany u ON u.USER_COMPANY_ID = c.USER_COMPANY_ID WHERE u.COMPANY_ID = :companyId", UserClaimDetils.class)
-                .setParameter("companyId", companyId).getResultList();
+                .setParameter("companyId", companyId)
+                .getResultList()
+                .stream()
+                .collect(Collectors.groupingBy(c -> c.getUSER_COMPANY_ID()));
     }
 
-    public List<UserCompanySalaryConfig> getUserCompanySalaryConfig(Integer companyId) {
+    public Map<Integer, List<UserCompanySalaryConfig>> getUserCompanySalaryConfig(Integer companyId) {
         return entityManager.createQuery("SELECT c FROM UserCompanySalaryConfig c JOIN " +
                         "UserCompany u ON u.USER_COMPANY_ID = c.USER_COMPANY_ID WHERE u.COMPANY_ID = :companyId", UserCompanySalaryConfig.class)
-                .setParameter("companyId", companyId).getResultList();
+                .setParameter("companyId", companyId)
+                .getResultList()
+                .stream()
+                .collect(Collectors.groupingBy(c -> c.getUSER_COMPANY_ID()));
     }
-    
-    public List<UserCompanySalaryCode> getUserCompanySalaryCode(Integer companyId) {
+
+    public Map<Integer, List<UserCompanySalaryCode>> getUserCompanySalaryCode(Integer companyId) {
         return entityManager.createQuery("SELECT c FROM UserCompanySalaryCode c JOIN " +
                         "UserCompany u ON u.USER_COMPANY_ID = c.USER_COMPANY_ID WHERE u.COMPANY_ID = :companyId", UserCompanySalaryCode.class)
-                .setParameter("companyId", companyId).getResultList();
+                .setParameter("companyId", companyId)
+                .getResultList()
+                .stream()
+                .collect(Collectors.groupingBy(c -> c.getUSER_COMPANY_ID()));
     }
 
-    public List<UserSalaryExtension> getUserCompanySalaryExtension(Integer companyId) {
-        return entityManager.createQuery("SELECT c FROM UserSalaryExtension c WHERE c.COMPANY_ID = :companyId", UserSalaryExtension.class)
-                .setParameter("companyId", companyId).getResultList();
+    public Map<Integer, List<UserSalaryExtension>> getUserCompanySalaryExtension(Integer companyId) {
+        return entityManager.createQuery("SELECT c FROM UserSalaryExtension c JOIN UserCompany u ON u.USER_COMPANY_ID = c.USER_COMPANY_ID WHERE c.COMPANY_ID = :companyId", UserSalaryExtension.class)
+                .setParameter("companyId", companyId)
+                .getResultList()
+                .stream()
+                .collect(Collectors.groupingBy(c -> c.getUSER_COMPANY_ID()));
     }
 
-    public List<EmployeePermission> getEmployeePermission(Integer companyId) {
-        return entityManager.createQuery("SELECT c FROM EmployeePermission c WHERE c.COMPANY_ID = :companyId", EmployeePermission.class)
-                .setParameter("companyId", companyId).getResultList();
+    public Map<Integer, List<EmployeePermission>> getEmployeePermission(Integer companyId) {
+        return entityManager.createQuery("SELECT c FROM EmployeePermission c JOIN UserCompany u ON u.USER_COMPANY_ID = c.USER_COMPANY_ID WHERE c.COMPANY_ID = :companyId", EmployeePermission.class)
+                .setParameter("companyId", companyId)
+                .getResultList()
+                .stream()
+                .collect(Collectors.groupingBy(c -> c.getUSER_COMPANY_ID()));
     }
+
 
 }

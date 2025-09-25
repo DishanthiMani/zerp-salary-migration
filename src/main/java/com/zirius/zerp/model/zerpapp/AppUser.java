@@ -25,7 +25,7 @@ public class AppUser {
     private Date CREATED_DATETIME;
     private Date MODIFIED_DATETIME;
     private Boolean  IS_SUPPORT_USER;
-    private Boolean  IS_REQUIRED_PWD_CHANGE;
+//    private Boolean  IS_REQUIRED_PWD_CHANGE;
     private Boolean  IS_MIGRATED;
     private String COGNITO_ID;
 

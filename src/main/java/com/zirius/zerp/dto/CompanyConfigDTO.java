@@ -11,6 +11,7 @@ import com.zirius.zerp.model.zerpapp.CompanyPensionOTP;
 import com.zirius.zerp.model.zerpapp.CompanySalaryDetails;
 import com.zirius.zerp.model.zerpapp.CompanyWorkPlace;
 import com.zirius.zerp.model.zerpapp.CompanyWorkPlaceMunicipality;
+import com.zirius.zerp.model.zerpapp.Department;
 import com.zirius.zerp.model.zerpapp.SalaryGroup;
 import com.zirius.zerp.model.zerpapp.SalaryReportingCode;
 import com.zirius.zerp.model.zerpapp.SalaryReportingCodeAmessage;
@@ -37,6 +38,15 @@ public class CompanyConfigDTO {
     private List<ClaimCollectorDetails> claimCollectorDetails;
     private List<CompanyWorkPlace> companyWorkPlaces;
     private List<CompanyWorkPlaceMunicipality> workPlaceMunicipalities;
+    private List<Department> departmentList;
+
+    public List<Department> getDepartmentList() {
+        return departmentList;
+    }
+
+    public void setDepartmentList(List<Department> departmentList) {
+        this.departmentList = departmentList;
+    }
 
     public List<SalaryGroup> getSalaryGroups() {
         return salaryGroups;

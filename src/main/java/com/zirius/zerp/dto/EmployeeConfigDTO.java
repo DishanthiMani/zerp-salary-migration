@@ -23,19 +23,19 @@ import java.util.List;
 @Data
 public class EmployeeConfigDTO {
 
-    private List<UserCompany> userCompanyList;
-    private List<EmployeeStartUpDetails> employeeStartUpDetails;
+    private Integer userCompanyId;
+    private EmployeeStartUpDetails employeeStartUpDetails;
     private List<EmployeeStartUpSalaryCode> employeeStartUpSalaryCodes;
-    private List<EmployeeSalaryAccounts> employeeSalaryAccounts;
-    private List<BankAccounts> bankAccounts;
-    private List<EmployeeTaxDeduction> employeeTaxDeductions;
-    private List<EmployeeAppointments> employeeAppointments;
-    private List<EmployeeScheme> employeeSchemes;
+    private EmployeeSalaryAccounts employeeSalaryAccounts;
+//    private List<BankAccounts> bankAccounts;
+    private EmployeeTaxDeduction employeeTaxDeductions;
+    private EmployeeAppointments employeeAppointments;
+    private EmployeeScheme employeeSchemes;
     private List<EmployeeWorkPlace> employeeWorkPlaces;
-    private List<EmployeeWorkerIdDetails> employeeWorkerIdDetails;
+    private EmployeeWorkerIdDetails employeeWorkerIdDetails;
     private List<UserFreeCarDetails> employeeFreeCarDetails;
     private List<UserClaimDetils> employeeClaimDetails;
-    private List<UserCompanySalaryConfig> employeeSalaryConfig;
+    private UserCompanySalaryConfig employeeSalaryConfig;
     private List<UserCompanySalaryCode> employeeSalaryCode;
     private List<UserSalaryExtension> employeeExtension;
     private List<EmployeePermission> employeePermissions;

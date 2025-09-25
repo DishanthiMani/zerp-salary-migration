@@ -7,6 +7,7 @@ import com.zirius.zerp.dto.CompanyDataDTO;
 import com.zirius.zerp.dto.EmployeeConfigDTO;
 import com.zirius.zerp.dto.SalaryReportingCodeDetailsDTO;
 import com.zirius.zerp.model.zerpapp.AltinnUser;
+import com.zirius.zerp.model.zerpapp.AppUser;
 import com.zirius.zerp.model.zerpapp.ClaimCollectorDetails;
 import com.zirius.zerp.model.zerpapp.ClaimCollectorValues;
 import com.zirius.zerp.model.zerpapp.Company;
@@ -18,12 +19,14 @@ import com.zirius.zerp.model.zerpapp.CompanyPensionOTP;
 import com.zirius.zerp.model.zerpapp.CompanySalaryDetails;
 import com.zirius.zerp.model.zerpapp.CompanyWorkPlace;
 import com.zirius.zerp.model.zerpapp.CompanyWorkPlaceMunicipality;
+import com.zirius.zerp.model.zerpapp.Department;
 import com.zirius.zerp.model.zerpapp.LedgerAccount;
 import com.zirius.zerp.model.zerpapp.SalaryGroup;
 import com.zirius.zerp.model.zerpapp.SalaryReportingCode;
 import com.zirius.zerp.model.zerpapp.SalaryReportingCodeAmessage;
 import com.zirius.zerp.model.zerpapp.SalaryReportingCodeBasis;
 import com.zirius.zerp.model.zerpapp.SalaryYearlyConstant;
+import com.zirius.zerp.model.zerpapp.UserCompany;
 import com.zirius.zerp.repository.zerpRepo.CompanyConfigRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -74,6 +77,7 @@ public class CompanyConfigService {
         List<SalaryReportingCodeBasis> salaryReportingCodeBases = companyConfigRepository.getSalaryCodeBasis(companyId);
         List<ClaimCollectorDetails> claimCollectorDetails = companyConfigRepository.getClaimCollectorDetails(companyId);
         List<ClaimCollectorValues> claimCollectorValues = companyConfigRepository.getClaimCollectorValues(companyId);
+        List<Department> departments = companyConfigRepository.getDepartmentList(companyId);
 
         CompanyConfigDTO configDTO = new CompanyConfigDTO();
         configDTO.setSalaryGroups(salaryGroups);
@@ -92,6 +96,7 @@ public class CompanyConfigService {
         configDTO.setCompanyPensionOTPS(companyPensionOTPS);
         configDTO.setAltinnUsers(altinnUsers);
         configDTO.setYearlyConstants(yearlyConstants);
+        configDTO.setDepartmentList(departments);
 
         return configDTO;
     }
@@ -106,12 +111,10 @@ public class CompanyConfigService {
             Integer accountId = Optional.ofNullable(salaryCode.getAccountId()).map(Long::intValue).orElse(null);
             Integer creditAccountId = Optional.ofNullable(salaryCode.getCreditAccountId()).map(Long::intValue).orElse(null);
 
-            // Set account number based on accountId
             if (accountId != null && accountIdToAccountNoMap.containsKey(accountId)) {
                 salaryCode.setAccountId(accountIdToAccountNoMap.get(accountId).longValue());
             }
 
-            // Set account number based on creditAccountId
             if (creditAccountId != null && accountIdToAccountNoMap.containsKey(creditAccountId)) {
                 salaryCode.setCreditAccountId(accountIdToAccountNoMap.get(creditAccountId).longValue());
             }
@@ -147,12 +150,16 @@ public class CompanyConfigService {
         AltinnCommunicationDetilsDTO altinnCommunicationDetilsDTO = new AltinnCommunicationDetilsDTO();
 
         CompanyConfigDTO configDTO = fetchCompanyConfig(companyId);
-        EmployeeConfigDTO employeeConfigDTO = employeeConfigService.getEmployeeConfiguration(companyId);
+        List<UserCompany> userCompanyList = employeeConfigService.getUserCompanyList(companyId);
+        List<AppUser> appUserList = employeeConfigService.getAppUserList(userCompanyList);
+        List<EmployeeConfigDTO> employeeConfigDTO = employeeConfigService.getEmployeeConfiguration(companyId, userCompanyList);
         altinnCommunicationDetilsDTO.setTaxCardDetailsDTO(taxCardDetailsService.getTaxCardDetailsData(companyId));
         altinnCommunicationDetilsDTO.setSalaryRunDetailsDTO(salaryRunDetailsService.getSalaryRunDetailsAndLog(companyId));
 
         companyDataDTO.setCompanyConfigDTO(configDTO);
-        companyDataDTO.setEmployeeConfigDTO(employeeConfigDTO);
+        companyDataDTO.setUserCompanyList(userCompanyList);
+        companyDataDTO.setAppUsers(appUserList);
+        companyDataDTO.setEmployeeConfigDTOList(employeeConfigDTO);
         companyDataDTO.setSalaryRunDetailsDTO(altinnCommunicationDetilsDTO);
 
         String jsonString = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(companyDataDTO);

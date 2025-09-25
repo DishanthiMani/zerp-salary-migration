@@ -13,6 +13,7 @@ import com.zirius.zerp.model.zerpapp.CompanyPensionOTP;
 import com.zirius.zerp.model.zerpapp.CompanySalaryDetails;
 import com.zirius.zerp.model.zerpapp.CompanyWorkPlace;
 import com.zirius.zerp.model.zerpapp.CompanyWorkPlaceMunicipality;
+import com.zirius.zerp.model.zerpapp.Department;
 import com.zirius.zerp.model.zerpapp.LedgerAccount;
 import com.zirius.zerp.model.zerpapp.SalaryGroup;
 import com.zirius.zerp.model.zerpapp.SalaryReportingCode;
@@ -22,6 +23,7 @@ import com.zirius.zerp.model.zerpapp.SalaryYearlyConstant;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.Query;
+import org.aspectj.lang.reflect.DeclareParents;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -103,6 +105,11 @@ public class CompanyConfigRepository {
     public List<ClaimCollectorValues> getClaimCollectorValues(Integer companyId) {
         return entityManager.createQuery("SELECT c FROM ClaimCollectorValues c JOIN ClaimCollectorDetails cd ON " +
                 "cd.CLAIM_COLLECTORS_VALUES_ID = c.CLAIM_COLLECTORS_VALUES_ID WHERE cd.COMPANY_ID = :companyId", ClaimCollectorValues.class)
+                .setParameter("companyId", companyId).getResultList();
+    }
+
+    public List<Department> getDepartmentList(Integer companyId) {
+        return entityManager.createQuery("SELECT c FROM Department c WHERE c.COMPANY_ID = :companyId", Department.class)
                 .setParameter("companyId", companyId).getResultList();
     }
 

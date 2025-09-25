@@ -69,7 +69,7 @@ public class SalaryRunLog {
 
     private Boolean IS_PERMISSION;
 
-    private Boolean IS_EMAIL_SENT;
+    private Integer EMAIL_STATUS;
 
     private Integer IS_HOLIDAY_PAY_RUN;
 
